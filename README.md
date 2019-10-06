@@ -1,6 +1,6 @@
 # Reinforcement learning in tetris 
 
-This is based on https://github.com/benycze/python-tetris implementation of tetris under the GPL-3.0 license. For the course SSY340 Deep machine learning on Chalmers University of Technology.
+This is based on https://github.com/benycze/python-tetris implementation of tetris under the GPL-3.0 license. For the course SSY340 Deep machine learning at Chalmers University of Technology, Sweden.
 ### Prerequisites
 
 pygame
