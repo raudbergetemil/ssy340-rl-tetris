@@ -361,7 +361,6 @@ class Tetris(object):
         Depending on the sample time of the agent here might be a good place
         to put a delay such that the rate of sending actions is limited
 
-        TODO: Implement this!
         """
         if action == 0:
             event = pygame.K_DOWN
@@ -374,7 +373,17 @@ class Tetris(object):
         
         pygame.event.post(event)
 
-        raise NotImplementedError('inject_action() is not implemented yet!')
+        #raise NotImplementedError('inject_action() is not implemented yet!')
+    
+    def reward(self):
+        """
+        Returns the reward at the current timestep
+
+        TODO: Implement this! 
+        """
+
+        raise NotImplementedError('reward() is not implemented!')
+        
 
 if __name__ == "__main__":
     Tetris(16,30).run()
