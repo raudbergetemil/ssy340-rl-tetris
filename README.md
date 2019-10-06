@@ -1,6 +1,6 @@
 # Reinforcement learning in tetris 
 
-This is based on https://github.com/benycze/python-tetris implementation of tetris under the GPL-3.0 license
+This is based on https://github.com/benycze/python-tetris implementation of tetris under the GPL-3.0 license. For the course SSY340 Deep machine learning on Chalmers University of Technology.
 ### Prerequisites
 
 pygame
@@ -13,7 +13,11 @@ pygame
 * *q*      - quit the game
 * *p*      - pause the game
 
-## Authors
+## Todo
+* Bypass GUI to be able to run game headless (to save time during training)
+* Create reward function (maybe in Tetris.game\_logic()?)
+* Create neural network 
+* Change user interface from keyboard to neural network (such that the NN is able to do actions)
 
 
 ## License
