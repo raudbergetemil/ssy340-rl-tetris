@@ -26,6 +26,7 @@ import math
 import block
 import constants
 
+
 class Tetris(object):
     """
     The class with implementation of tetris game logic.
@@ -81,6 +82,8 @@ class Tetris(object):
         self.speed = 1
         # The score level threshold
         self.score_level = constants.SCORE_LEVEL
+        # Number of actions except quit or pause
+        self.n_actions = 4
 
     def apply_action(self):
         """
@@ -353,8 +356,24 @@ class Tetris(object):
     def inject_action(self, action):
         """
         Injects an action into the PyGame event queue to be processed by the
+        game. Takes an integer between 0 and n_actions.
+
+        Depending on the sample time of the agent here might be a good place
+        to put a delay such that the rate of sending actions is limited
+
         TODO: Implement this!
         """
+        if action == 0:
+            event = pygame.K_DOWN
+        elif action == 1:
+            event = pygame.K_LEFT
+        elif action == 2:
+            event = pygame.K_RIGHT
+        elif action == 3:
+            event = pygame.K_SPACE
+        
+        pygame.event.post(event)
+
         raise NotImplementedError('inject_action() is not implemented yet!')
 
 if __name__ == "__main__":
