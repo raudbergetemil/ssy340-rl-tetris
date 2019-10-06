@@ -363,13 +363,21 @@ class Tetris(object):
 
         """
         if action == 0:
-            event = pygame.K_DOWN
+            event = pygame.event.Event(pygame.KEYDOWN, \
+                key=pygame.K_DOWN,\
+                unicode='')
         elif action == 1:
-            event = pygame.K_LEFT
+            event = pygame.event.Event(pygame.KEYDOWN, \
+                key=pygame.K_LEFT,\
+                unicode='')
         elif action == 2:
-            event = pygame.K_RIGHT
+            event = pygame.event.Event(pygame.KEYDOWN, \
+                key=pygame.K_RIGHT,\
+                unicode='')
         elif action == 3:
-            event = pygame.K_SPACE
+            event = pygame.event.Event(pygame.KEYDOWN, \
+                key=pygame.K_SPACE,\
+                unicode='')
         
         pygame.event.post(event)
 
@@ -383,7 +391,7 @@ class Tetris(object):
         """
 
         raise NotImplementedError('reward() is not implemented!')
-        
+
 
 if __name__ == "__main__":
     Tetris(16,30).run()
