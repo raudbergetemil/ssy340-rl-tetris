@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import pygame
 import pdb
 
@@ -28,6 +29,13 @@ import constants
 class Tetris(object):
     """
     The class with implementation of tetris game logic.
+
+    'apply_action()' reads the PyGame event queue for keyboard presses. Is it possible
+    to inject actions from the neural network there in a similar way?
+
+    The attribute self.blk_list seem to contain all the blocks in the game. Iterate over 
+    this list to extract data to the reward function?
+
     """
 
     def __init__(self,bx,by):
@@ -78,6 +86,8 @@ class Tetris(object):
         """
         Get the event from the event queue and run the appropriate 
         action.
+
+        TODO: Insert actions from neural network here
         """
         # Take the event from the event queue.
         for ev in pygame.event.get():
@@ -339,6 +349,13 @@ class Tetris(object):
             blk.draw()
         # Draw the screen buffer
         pygame.display.flip()
+    
+    def inject_action(self, action):
+        """
+        Injects an action into the PyGame event queue to be processed by the
+        TODO: Implement this!
+        """
+        raise NotImplementedError('inject_action() is not implemented yet!')
 
 if __name__ == "__main__":
     Tetris(16,30).run()
