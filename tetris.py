@@ -90,7 +90,6 @@ class Tetris(object):
         Get the event from the event queue and run the appropriate 
         action.
 
-        TODO: Insert actions from neural network here
         """
         # Take the event from the event queue.
         for ev in pygame.event.get():
