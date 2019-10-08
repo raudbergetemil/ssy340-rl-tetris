@@ -390,7 +390,15 @@ class Tetris(object):
         """
 
         raise NotImplementedError('reward() is not implemented!')
+    
+    def get_active_block_state():
+        """
+        Returns the position, rotation and type of the active block
 
+        TODO: Implement this!
+        """
+
+        raise NotImplementedError('get_active_block_state is not implemented!')
 
 if __name__ == "__main__":
     Tetris(16,30).run()

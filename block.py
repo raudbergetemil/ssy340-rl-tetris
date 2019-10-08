@@ -64,6 +64,28 @@ class Block(object):
         # Rotation of the screen
         self.diff_rotation = 0
 
+        # Block types
+        self.block_types = (
+            ([[0,0],[1,0],[2,0],[3,0]],constants.RED,True),     # I block 
+            ([[0,0],[1,0],[0,1],[-1,1]],constants.GREEN,True),  # S block 
+            ([[0,0],[1,0],[2,0],[2,1]],constants.BLUE,True),    # J block
+            ([[0,0],[0,1],[1,0],[1,1]],constants.ORANGE,False), # O block
+            ([[-1,0],[0,0],[0,1],[1,1]],constants.GOLD,True),   # Z block
+            ([[0,0],[1,0],[2,0],[1,1]],constants.PURPLE,True),  # T block
+            ([[0,0],[1,0],[2,0],[0,1]],constants.CYAN,True),    # J block
+        )
+
+        # Initialise block type
+        self.type = -1
+
+        # Determine block type 
+        for i in range(len(self.block_types)):
+            if shape == self.block_types[i][0]:
+                self.type = i
+                break
+
+
+
     def draw(self):
         """
         Draw the block from shape blocks. Each shape block
