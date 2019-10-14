@@ -399,7 +399,7 @@ class Tetris(object):
         """
         Returns the reward at the current timestep
 
-        TODO: Implement this! 
+        TODO: See over this function, maybe add some type of reward type 
         """
         
         reward_type = "max"
@@ -418,7 +418,7 @@ class Tetris(object):
         """
         Returns the position, rotation and type of the active block
 
-        TODO: 
+        TODO: See if some states should be changed and or added
         """
         # Calculates the topography
 

@@ -15,7 +15,7 @@ pygame
 
 ## Todo
 * Bypass GUI to be able to run game headless (to save time during training)
-* Create reward function (maybe in Tetris.game\_logic()?)
+* See over the reward funciton, currently not implemented in Tetris.game\_logic()
 * Create neural network 
 * Change user interface from keyboard to neural network (such that the NN is able to do actions)
 
