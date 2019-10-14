@@ -85,6 +85,9 @@ class Tetris(object):
         # Number of actions except quit or pause
         self.n_actions = 4
 
+        #  Topography of top layer used as state
+        self.topography = [0 for i in range(self.blocks_in_line)]
+
     def apply_action(self):
         """
         Get the event from the event queue and run the appropriate 
@@ -389,6 +392,9 @@ class Tetris(object):
 
         TODO: Implement this! 
         """
+        
+
+
 
         raise NotImplementedError('reward() is not implemented!')
     
@@ -398,9 +404,14 @@ class Tetris(object):
 
         TODO: Implement this!
         """
-        
+
+        for block in self.blk_list:
+            for shape_block in block.shape:
+                if self.topography[shape_block.x] < shape_block.y:
+                    self.topography[shape_block.x] = shape_block.y
+
         raise NotImplementedError('get_active_block_state is not implemented!')
-        return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation
+        return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, topography
 
 if __name__ == "__main__":
     Tetris(16,30).run()
