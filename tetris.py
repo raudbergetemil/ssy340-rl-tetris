@@ -166,6 +166,8 @@ class Tetris(object):
             self.get_block()
             self.game_logic()
             self.draw_game()
+            print(self.get_active_block_state())
+            print(self.reward())
         # Display the game_over and wait for a keypress
         if self.game_over:
             self.print_game_over()
@@ -418,12 +420,16 @@ class Tetris(object):
         TODO: Implement this!
         """
 
-        for block in self.blk_list:
-            for shape_block in block.shape:
-                if self.topography[shape_block.x] < shape_block.y:
-                    self.topography[shape_block.x] = shape_block.y
+        for i in range(len(self.blk_list)-1): # Skip the last which is the last one
+            for shape_block in self.blk_list[i].shape:
+                index = math.floor(shape_block.x/constants.BWIDTH)
+                try:
+                    if self.topography[index] < self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT):
+                        self.topography[index] = self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT)
+                except:
+                    print("Nr xrows: {}, block pos: {}".format(len(self.topography), index))
 
-        raise NotImplementedError('get_active_block_state is not implemented!')
+        #raise NotImplementedError('get_active_block_state is not implemented!')
         return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, self.topography
 
 if __name__ == "__main__":
