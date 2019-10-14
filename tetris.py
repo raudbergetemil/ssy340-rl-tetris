@@ -392,9 +392,14 @@ class Tetris(object):
 
         TODO: Implement this! 
         """
-        
+        reward = 0
+        reward_type = "max"
 
-
+        if reward_type == "max":
+            reward -= max(self.topography)
+        elif reward_type == "sum":
+            reward -= sum(self.topography)
+        ## Any more types we should try?
 
         raise NotImplementedError('reward() is not implemented!')
     
@@ -411,7 +416,7 @@ class Tetris(object):
                     self.topography[shape_block.x] = shape_block.y
 
         raise NotImplementedError('get_active_block_state is not implemented!')
-        return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, topography
+        return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, self.topography
 
 if __name__ == "__main__":
     Tetris(16,30).run()
