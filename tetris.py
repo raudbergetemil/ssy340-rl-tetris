@@ -85,8 +85,13 @@ class Tetris(object):
         # Number of actions except quit or pause
         self.n_actions = 4
 
-        #  Topography of top layer used as state
+
+        ###### Variables for the RL ######
+        # Topography of top layer used as state
         self.topography = [0 for i in range(self.blocks_in_line)]
+        # Next reward, is currently set by remove_line() and reward()
+        self.next_reward = 0
+        self.reward_of_line_completion = 100
 
     def apply_action(self):
         """
@@ -304,6 +309,7 @@ class Tetris(object):
             block.remove_blocks(y)
         # Setup new block list (not needed blocks are removed)
         self.blk_list = [blk for blk in self.blk_list if blk.has_blocks()]
+        self.next_reward += self.reward_of_line_completion
 
     def get_blocks_in_line(self,y):
         """
@@ -392,16 +398,18 @@ class Tetris(object):
 
         TODO: Implement this! 
         """
-        reward = 0
+        
         reward_type = "max"
 
         if reward_type == "max":
-            reward -= max(self.topography)
+            self.next_reward -= max(self.topography)
         elif reward_type == "sum":
-            reward -= sum(self.topography)
+            self.next_reward -= sum(self.topography)
         ## Any more types we should try?
 
-        raise NotImplementedError('reward() is not implemented!')
+        current_reward = self.next_reward
+        self.next_reward = 0
+        return current_reward
     
     def get_active_block_state(self):
         """
