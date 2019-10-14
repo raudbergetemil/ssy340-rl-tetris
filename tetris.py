@@ -79,7 +79,7 @@ class Tetris(object):
         # Score settings
         self.score = 0
         # Remember the current speed 
-        self.speed = 1
+        self.speed = 4
         # The score level threshold
         self.score_level = constants.SCORE_LEVEL
         # Number of actions except quit or pause
@@ -310,6 +310,7 @@ class Tetris(object):
         for block in self.blk_list:
             block.remove_blocks(y)
         # Setup new block list (not needed blocks are removed)
+        print("++++++++++++++++++++ REMOVING LINE +++++++++++++++++++++")
         self.blk_list = [blk for blk in self.blk_list if blk.has_blocks()]
         self.next_reward += self.reward_of_line_completion
 
@@ -417,19 +418,19 @@ class Tetris(object):
         """
         Returns the position, rotation and type of the active block
 
-        TODO: The topography is no locking at the position of the blocksn that are at the bottom of the play field. 
-        It does not change when a line is removed. solution: loop through the shape if the plock and look at each rect objects position. The unit is 
-        possibly in squares and not pixles.
+        TODO: 
         """
         # Calculates the topography
-        for i in range(len(self.blk_list)-1): # Skip the last which is the last one
-            for shape_block in self.blk_list[i].shape:
+
+        # Reinits the list
+        self.topography = [0 for i in range(self.blocks_in_line)]
+        for block in self.blk_list: 
+            if block == self.active_block:
+                continue   # Skip the active block
+            for shape_block in block.shape:
                 index = math.floor(shape_block.x/constants.BWIDTH)
-                try:
-                    if self.topography[index] < self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT):
-                        self.topography[index] = self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT)
-                except: ## Used for debugging
-                    print("Nr xrows: {}, block pos: {}".format(len(self.topography), index))
+                if self.topography[index] < self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT):
+                    self.topography[index] = self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT)
 
         #raise NotImplementedError('get_active_block_state is not implemented!')
         return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, self.topography
