@@ -115,8 +115,9 @@ class Block(object):
         newy = y*math.cos(rads) + x*math.sin(rads)
 
         # Updating the absolute rotaion
-        self.abs_rotation += self.diff_rotation
+        self.abs_rotation += self.diff_rotation/4   # divided by 4 siunce stupid code does it for all shapes in block :(
         self.abs_rotation = self.abs_rotation%360
+       
         return (newx,newy)        
 
     def move(self,x,y):
