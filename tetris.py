@@ -93,6 +93,8 @@ class Tetris(object):
         self.next_reward = 0
         self.reward_of_line_completion = 100
 
+        self.GUI = False
+
     def apply_action(self):
         """
         Get the event from the event queue and run the appropriate 
@@ -149,7 +151,7 @@ class Tetris(object):
         pygame.font.init()
         self.myfont = pygame.font.SysFont(pygame.font.get_default_font(),constants.FONT_SIZE)
         self.screen = pygame.display.set_mode((self.resx,self.resy))
-        pygame.display.set_caption("Tetris")
+        if self.GUI: pygame.display.set_caption("Tetris")
         # Setup the time to fire the move event every given time
         self.set_move_timer()
         # Control variables for the game. The done signal is used 
@@ -160,17 +162,17 @@ class Tetris(object):
         self.game_over = False
         self.new_block = True
         # Print the initial score
-        self.print_status_line()
+        if self.GUI: self.print_status_line()
         while not(self.done) and not(self.game_over):
             # Get the block and run the game logic
             self.get_block()
             self.game_logic()
-            self.draw_game()
-            print(self.get_active_block_state())
-            print(self.reward())
+            if self.GUI: self.draw_game()
+            else: self.agent_action(state=self.get_active_block_state(), reward=self.get_active_block_state())
         # Display the game_over and wait for a keypress
         if self.game_over:
-            self.print_game_over()
+            if self.GUI: self.print_game_over()
+            else: print("GAME FUCKING OVER")
         # Disable the pygame stuff
         pygame.font.quit()
         pygame.display.quit()        
@@ -390,6 +392,8 @@ class Tetris(object):
             event = pygame.event.Event(pygame.KEYDOWN, \
                 key=pygame.K_SPACE,\
                 unicode='')
+        else:
+            raise ValueError("Invalid action")
         
         pygame.event.post(event)
 
@@ -434,6 +438,14 @@ class Tetris(object):
 
         #raise NotImplementedError('get_active_block_state is not implemented!')
         return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation, self.topography
+
+    def agent_action(self,state,reward):
+        """
+        Agent code for performing action
+
+        """
+
+        self.inject_action(random.randint(0,3))
 
 if __name__ == "__main__":
     Tetris(16,30).run()
