@@ -84,6 +84,9 @@ class Block(object):
                 self.type = i
                 break
 
+        # Defining absolute rotation used as state, assumes that all blocks starts with the same rotation
+        self.abs_rotation = 0 # either 0, 90, 180 or 270
+
 
 
     def draw(self):
@@ -110,6 +113,10 @@ class Block(object):
         rads = self.diff_rotation * (math.pi / 180.0)
         newx = x*math.cos(rads) - y*math.sin(rads)
         newy = y*math.cos(rads) + x*math.sin(rads)
+
+        # Updating the absolute rotaion
+        self.abs_rotation += self.diff_rotation
+        self.abs_rotation = self.abs_rotation%360
         return (newx,newy)        
 
     def move(self,x,y):

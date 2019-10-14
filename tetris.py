@@ -184,6 +184,7 @@ class Tetris(object):
         while True: 
             for ev in pygame.event.get():
                 if ev.type == pygame.QUIT or (ev.type == pygame.KEYDOWN and ev.unicode == 'q'):
+                    print(self.score)
                     return
 
     def print_text(self,str_lst,x,y):
@@ -399,7 +400,7 @@ class Tetris(object):
         """
         
         raise NotImplementedError('get_active_block_state is not implemented!')
-        return self.active_block.type, self.active_block.x, self.active_block.y # how to find the rotation?
+        return self.active_block.type, self.active_block.x, self.active_block.y, self.active_block.abs_rotation
 
 if __name__ == "__main__":
     Tetris(16,30).run()
