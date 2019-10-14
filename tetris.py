@@ -417,16 +417,18 @@ class Tetris(object):
         """
         Returns the position, rotation and type of the active block
 
-        TODO: Implement this!
+        TODO: The topography is no locking at the position of the blocksn that are at the bottom of the play field. 
+        It does not change when a line is removed. solution: loop through the shape if the plock and look at each rect objects position. The unit is 
+        possibly in squares and not pixles.
         """
-
+        # Calculates the topography
         for i in range(len(self.blk_list)-1): # Skip the last which is the last one
             for shape_block in self.blk_list[i].shape:
                 index = math.floor(shape_block.x/constants.BWIDTH)
                 try:
                     if self.topography[index] < self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT):
                         self.topography[index] = self.blocks_in_pile - math.floor(shape_block.y/constants.BHEIGHT)
-                except:
+                except: ## Used for debugging
                     print("Nr xrows: {}, block pos: {}".format(len(self.topography), index))
 
         #raise NotImplementedError('get_active_block_state is not implemented!')
